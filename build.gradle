@@ -1,0 +1,49 @@
+apply plugin: 'java'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+// Use Java 8 by default
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+version = '1.0'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "com.github.jengelman.gradle.plugins:shadow:1.2.0"
+    }
+}
+
+ext {
+    junit = '4.11'
+    guava = '18.0'
+    dropwizardCore = '0.7.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile "junit:junit:$junit"
+
+    compile "com.google.guava:guava:$guava"
+    compile "io.dropwizard:dropwizard-core:$dropwizardCore"
+}
+
+jar {
+    manifest {
+        attributes(
+                "Implementation-Title": "Petzila API",
+                "Implementation-Version": version,
+                "Main-Class": "com.petzila.api.PetzilaApplication"
+        )
+    }
+}
+
+shadowJar {
+    baseName = "petzila-api"
+    classifier = ""
+}
