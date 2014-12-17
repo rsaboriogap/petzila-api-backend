@@ -1,4 +1,4 @@
-package com.petzila.api.dto;
+package com.petzila.api.api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

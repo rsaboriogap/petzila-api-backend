@@ -1,7 +1,7 @@
 package com.petzila.api;
 
-import com.petzila.api.healthcheck.DatabaseHealthCheck;
-import com.petzila.api.resource.IdentityLoginResource;
+import com.petzila.api.health.DatabaseHealthCheck;
+import com.petzila.api.resources.IdentityLoginResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;

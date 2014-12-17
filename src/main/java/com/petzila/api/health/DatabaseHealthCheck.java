@@ -1,4 +1,4 @@
-package com.petzila.api.healthcheck;
+package com.petzila.api.health;
 
 import com.codahale.metrics.health.HealthCheck;
 

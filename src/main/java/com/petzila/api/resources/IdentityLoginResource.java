@@ -1,8 +1,8 @@
-package com.petzila.api.resource;
+package com.petzila.api.resources;
 
 import com.codahale.metrics.annotation.Timed;
-import com.petzila.api.dto.Login;
-import com.petzila.api.dto.LoginResponse;
+import com.petzila.api.api.Login;
+import com.petzila.api.api.LoginResponse;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
