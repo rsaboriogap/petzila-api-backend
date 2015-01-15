@@ -1,47 +1,56 @@
-apply plugin: 'java'
-apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'war'
+apply plugin: 'com.github.jacobono.jaxb'
+
+
+group = 'com.petzila.api'
+version = '1.0'
 
 // Use Java 8 by default
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
-version = '1.0'
-
 buildscript {
     repositories {
         jcenter()
     }
+
     dependencies {
-        classpath "com.github.jengelman.gradle.plugins:shadow:1.2.0"
+        classpath 'com.github.jacobono:gradle-jaxb-plugin:1.3.5'
     }
 }
 
-ext {
-    junit = '4.11'
-    dropwizardCore = '0.7.0'
+jaxb {
+    xsdDir = "src/main/resources/schema"
 }
 
 repositories {
     mavenCentral()
 }
 
+ext {
+    jee = '7.+'
+    junit = '4.12'
+    jaxbXjc = '2.2.7-b41'
+    jaxbApi = '2.2.7'
+    hibernateEntityManager = '4.3.8.Final'
+}
+
 dependencies {
     testCompile "junit:junit:$junit"
 
-    compile "io.dropwizard:dropwizard-core:$dropwizardCore"
+    providedCompile "javax:javaee-api:$jee"
+
+    // JAXB Schema Generator
+    jaxb "com.sun.xml.bind:jaxb-xjc:$jaxbXjc"
+    jaxb "com.sun.xml.bind:jaxb-impl:$jaxbXjc"
+    jaxb "javax.xml.bind:jaxb-api:$jaxbApi"
+
+    // Hibernate Core
+    compile "org.hibernate:hibernate-entitymanager:$hibernateEntityManager"
+    // Hibernate Metamodel Generator
+    compile "org.hibernate:hibernate-jpamodelgen:$hibernateEntityManager"
 }
 
-jar {
-    manifest {
-        attributes(
-                "Implementation-Title": "Petzila API",
-                "Implementation-Version": version,
-                "Main-Class": "com.petzila.api.PetzilaApplication"
-        )
-    }
-}
-
-shadowJar {
-    baseName = "petzila-api"
-    classifier = ""
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.1'
 }
