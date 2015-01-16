@@ -1,4 +1,4 @@
-package com.petzila.api.service;
+package com.petzila.api.service.user;
 
 import com.petzila.api.domain.User;
 import com.petzila.api.model.XSignupRequest;

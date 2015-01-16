@@ -11,7 +11,7 @@ import javax.ejb.Stateless;
  * Created by vicente on 16/01/15.
  */
 @Stateless
-public class XSignupRequestUser {
+public class XSignupRequestUserMapper {
     private Mapper mapper= DozerBeanMapperSingletonWrapper.getInstance();
 
     public User convertFrom(XSignupRequest signupRequest){

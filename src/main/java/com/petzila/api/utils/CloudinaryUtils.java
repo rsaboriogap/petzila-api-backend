@@ -2,12 +2,15 @@ package com.petzila.api.utils;
 
 import com.cloudinary.Cloudinary;
 
+import javax.ejb.Stateless;
+import javax.inject.Named;
 import java.io.IOException;
 import java.util.Map;
 
 /**
  * Created by vicente on 16/01/15.
  */
+@Named
 public class CloudinaryUtils {
 
     private Cloudinary cloudinary = new Cloudinary(Cloudinary.asMap(
