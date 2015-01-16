@@ -5,10 +5,10 @@ import javax.ejb.ApplicationException;
 @ApplicationException(rollback = true)
 public class ServiceException extends RuntimeException {
     private String message;
-    private Integer code;
+    private int code;
     private Object[] arguments;
 
-    public ServiceException(String message, Integer code, Object[] arguments) {
+    public ServiceException(String message, int code, Object[] arguments) {
         this.message = message;
         this.code = code;
         this.arguments = arguments;
@@ -18,7 +18,7 @@ public class ServiceException extends RuntimeException {
         return message;
     }
 
-    public Integer getCode() {
+    public int getCode() {
         return code;
     }
 

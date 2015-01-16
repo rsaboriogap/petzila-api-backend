@@ -1,35 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.petzila.api.domain;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-/**
- *
- * @author vicente
- */
 @Entity
 @Table(name = "session_request", catalog = "petzila", schema = "")
 public class SessionRequest implements Serializable {
@@ -38,63 +16,48 @@ public class SessionRequest implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "session_request_id")
-    private Long sessionRequestId;
+    private long id;
     @Column(name = "ios_publish_point")
     private String iosPublishPoint;
     @Column(name = "android_publish_points")
-    private String androidPublishPoints;
+    private String androidPublishPoints; //@TODO List ?
     @Column(name = "web_publish_points")
-    private String webPublishPoints;
+    private String webPublishPoints; //@TODO List ?
     @Column(name = "ms_nonce")
     private String msNonce;
     @Column(name = "audio_port")
-    private String audioPort;
+    private String audioPort; //@TODO integer ?
     @Column(name = "session_server_ip")
-    private String sessionServerIp;
+    private String sessionServerIp; //@TODO IpAddress ?
     @Column(name = "session_server_password")
     private String sessionServerPassword;
     @Column(name = "session_server_nonce")
     private String sessionServerNonce;
     @Basic(optional = false)
-    @Column(name = "ready")
+    @Column(name = "ready") //@TODO is_ready en la BD (todos los booleans cambiarlos en la BD a is_xxx)
     private boolean ready;
     @Basic(optional = false)
     @Column(name = "processed")
-    private boolean processed;
+    private boolean processed; //@TODO is_proccesed en la BD (todos los booleans cambiarlos en la BD a is_xxx)
     @Column(name = "timestamp")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.DATE) //@TODO TIMESTAMP?
     private Date timestamp;
     @Basic(optional = false)
     @Column(name = "need_process")
     private boolean needProcess;
     @Basic(optional = false)
     @Column(name = "invalid")
-    private boolean invalid;
+    private boolean invalid; //@TODO is_invalid en la BD (todos los booleans cambiarlos en la BD a is_xxx)
     @JoinColumn(name = "petzi_connect_id", referencedColumnName = "petzi_connect_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private PetziConnect petziConnectId;
+    private PetziConnect petziConnect;
 
-    public SessionRequest() {
+    public long getId() {
+        return id;
     }
 
-    public SessionRequest(Long sessionRequestId) {
-        this.sessionRequestId = sessionRequestId;
-    }
-
-    public SessionRequest(Long sessionRequestId, boolean ready, boolean processed, boolean needProcess, boolean invalid) {
-        this.sessionRequestId = sessionRequestId;
-        this.ready = ready;
-        this.processed = processed;
-        this.needProcess = needProcess;
-        this.invalid = invalid;
-    }
-
-    public Long getSessionRequestId() {
-        return sessionRequestId;
-    }
-
-    public void setSessionRequestId(Long sessionRequestId) {
-        this.sessionRequestId = sessionRequestId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getIosPublishPoint() {
@@ -201,42 +164,35 @@ public class SessionRequest implements Serializable {
         this.invalid = invalid;
     }
 
-    public PetziConnect getPetziConnectId() {
-        return petziConnectId;
+    public PetziConnect getPetziConnect() {
+        return petziConnect;
     }
 
-    public void setPetziConnectId(PetziConnect petziConnectId) {
-        this.petziConnectId = petziConnectId;
+    public void setPetziConnect(PetziConnect petziConnectId) {
+        this.petziConnect = petziConnectId;
     }
 
     @Override
     public int hashCode() {
         HashCodeBuilder hcb = new HashCodeBuilder();
-        hcb.append(this.sessionRequestId);
+        hcb.append(this.id);
         return hcb.toHashCode();
     }
 
-    /**
-     * @see Object#equals(Object)
-     */
     @Override
     public boolean equals(Object obj) {
         boolean equals = false;
         if (SessionRequest.class.isInstance(obj)) {
-            SessionRequest sessionRequest= SessionRequest.class.cast(obj);
+            SessionRequest sessionRequest = SessionRequest.class.cast(obj);
             EqualsBuilder eb = new EqualsBuilder();
-            eb.append(this.sessionRequestId, sessionRequest.getSessionRequestId());
+            eb.append(this.id, sessionRequest.getId());
             equals = eb.isEquals();
         }
         return equals;
     }
 
-    /**
-     * @see Object#toString()
-     */
     @Override
     public String toString() {
         return ReflectionToStringBuilder.toString(this);
     }
-    
 }

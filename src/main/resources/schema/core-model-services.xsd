@@ -7,7 +7,7 @@
 
     <!--REQUESTS-->
     <!--SIGNUP-->
-    <xsd:element name="XSignupRequest">
+    <xsd:element name="XSignUp">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element name="email" type="xsd:string"/>

@@ -16,9 +16,9 @@ public class ServiceExceptionMapper implements ExceptionMapper<ServiceException>
     public Response toResponse(ServiceException se) {
         XPetzilaResponse petzilaResponse = new XPetzilaResponse();
 
-        if( se.getCode()!= null){
-            petzilaResponse.setMessage(ApiUtils.getError(se.getCode()+""));
-        }else{
+        if (se.getCode() != 0) {
+            petzilaResponse.setMessage(ApiUtils.getError(se.getCode() + ""));
+        } else {
             petzilaResponse.setMessage(ApiUtils.getError("920"));
         }
 

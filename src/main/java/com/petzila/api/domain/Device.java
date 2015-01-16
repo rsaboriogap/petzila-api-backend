@@ -1,32 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.petzila.api.domain;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 
-/**
- *
- * @author vicente
- */
 @Entity
 @Table(name = "device", catalog = "petzila", schema = "")
 public class Device implements Serializable {
@@ -35,7 +15,7 @@ public class Device implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "device_id")
-    private Long deviceId;
+    private long id;
     @Basic(optional = false)
     @Column(name = "os")
     private String os;
@@ -44,27 +24,14 @@ public class Device implements Serializable {
     private String key;
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private User userId;
+    private User user;
 
-    public Device() {
+    public long getId() {
+        return id;
     }
 
-    public Device(Long deviceId) {
-        this.deviceId = deviceId;
-    }
-
-    public Device(Long deviceId, String os, String key) {
-        this.deviceId = deviceId;
-        this.os = os;
-        this.key = key;
-    }
-
-    public Long getDeviceId() {
-        return deviceId;
-    }
-
-    public void setDeviceId(Long deviceId) {
-        this.deviceId = deviceId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getOs() {
@@ -83,43 +50,35 @@ public class Device implements Serializable {
         this.key = key;
     }
 
-    public User getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
     public int hashCode() {
         HashCodeBuilder hcb = new HashCodeBuilder();
-        hcb.append(this.deviceId);
+        hcb.append(this.id);
         return hcb.toHashCode();
     }
 
-    /**
-     * @see Object#equals(Object)
-     */
     @Override
     public boolean equals(Object obj) {
         boolean equals = false;
         if (Device.class.isInstance(obj)) {
-            Device device= Device.class.cast(obj);
+            Device device = Device.class.cast(obj);
             EqualsBuilder eb = new EqualsBuilder();
-            eb.append(this.deviceId, device.getDeviceId());
+            eb.append(this.id, device.getId());
             equals = eb.isEquals();
         }
         return equals;
     }
 
-    /**
-     * @see Object#toString()
-     */
     @Override
     public String toString() {
         return ReflectionToStringBuilder.toString(this);
     }
-
-
 }

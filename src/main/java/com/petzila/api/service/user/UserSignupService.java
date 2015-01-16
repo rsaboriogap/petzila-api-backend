@@ -1,11 +1,8 @@
 package com.petzila.api.service.user;
 
 import com.petzila.api.domain.User;
-import com.petzila.api.model.XSignupRequest;
+import com.petzila.api.model.XSignUp;
 
-/**
- * Created by vicente on 16/01/15.
- */
 public interface UserSignupService {
-    User signup(XSignupRequest signupRequest);
+    User signup(XSignUp signUp);
 }

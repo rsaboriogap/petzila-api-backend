@@ -1,38 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.petzila.api.domain;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-/**
- *
- * @author vicente
- */
 @Entity
 @Table(name = "pet", catalog = "petzila", schema = "")
 public class Pet implements Serializable {
@@ -41,7 +16,7 @@ public class Pet implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "pet_id")
-    private Long petId;
+    private long id;
     @Column(name = "name")
     private String name;
     @Basic(optional = false)
@@ -51,56 +26,40 @@ public class Pet implements Serializable {
     @Column(name = "species")
     private String species;
     @Basic(optional = false)
-    @Column(name = "size")
+    @Column(name = "size") //@TODO enumerado?
     private String size;
     @Column(name = "profile_picture")
     private String profilePicture;
     @Column(name = "description")
     private String description;
-    @Column(name = "breed")
+    @Column(name = "breed") //@TODO enumerado?
     private String breed;
     @Column(name = "other")
     private String other;
     @Basic(optional = false)
-    @Column(name = "gender")
+    @Column(name = "gender") //@TODO enumerado?
     private String gender;
-    @Column(name = "food")
+    @Column(name = "food") //@TODO enumerado?
     private String food;
     @Column(name = "website")
     private String website;
     @Column(name = "updated_at")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.DATE) //@TODO es DATE o TIMESTAMP??
     private Date updatedAt;
     @Basic(optional = false)
     @Column(name = "created_at")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.DATE) //@TODO es DATE o TIMESTAMP??
     private Date createdAt;
     @JoinColumn(name = "owner", referencedColumnName = "user_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User owner;
 
-    public Pet() {
+    public long getId() {
+        return id;
     }
 
-    public Pet(Long petId) {
-        this.petId = petId;
-    }
-
-    public Pet(Long petId, String age, String species, String size, String gender, Date createdAt) {
-        this.petId = petId;
-        this.age = age;
-        this.species = species;
-        this.size = size;
-        this.gender = gender;
-        this.createdAt = createdAt;
-    }
-
-    public Long getPetId() {
-        return petId;
-    }
-
-    public void setPetId(Long petId) {
-        this.petId = petId;
+    public void setId(long petId) {
+        this.id = petId;
     }
 
     public String getName() {
@@ -218,28 +177,22 @@ public class Pet implements Serializable {
     @Override
     public int hashCode() {
         HashCodeBuilder hcb = new HashCodeBuilder();
-        hcb.append(this.petId);
+        hcb.append(this.id);
         return hcb.toHashCode();
     }
 
-    /**
-     * @see Object#equals(Object)
-     */
     @Override
     public boolean equals(Object obj) {
         boolean equals = false;
         if (Pet.class.isInstance(obj)) {
-            Pet pet= Pet.class.cast(obj);
+            Pet pet = Pet.class.cast(obj);
             EqualsBuilder eb = new EqualsBuilder();
-            eb.append(this.petId, pet.getPetId());
+            eb.append(this.id, pet.getId());
             equals = eb.isEquals();
         }
         return equals;
     }
 
-    /**
-     * @see Object#toString()
-     */
     @Override
     public String toString() {
         return ReflectionToStringBuilder.toString(this);

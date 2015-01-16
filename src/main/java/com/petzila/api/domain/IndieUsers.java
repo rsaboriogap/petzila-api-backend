@@ -1,27 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.petzila.api.domain;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 
-/**
- *
- * @author vicente
- */
 @Entity
 @Table(name = "IndieUsers", catalog = "petzila", schema = "")
 public class IndieUsers implements Serializable {
@@ -29,23 +14,16 @@ public class IndieUsers implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "indie_user_id")
-    private Long indieUserId;
+    private long id;
     @Column(name = "email")
     private String email;
 
-    public IndieUsers() {
+    public long getId() {
+        return id;
     }
 
-    public IndieUsers(Long indieUserId) {
-        this.indieUserId = indieUserId;
-    }
-
-    public Long getIndieUserId() {
-        return indieUserId;
-    }
-
-    public void setIndieUserId(Long indieUserId) {
-        this.indieUserId = indieUserId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -59,31 +37,24 @@ public class IndieUsers implements Serializable {
     @Override
     public int hashCode() {
         HashCodeBuilder hcb = new HashCodeBuilder();
-        hcb.append(this.indieUserId);
+        hcb.append(this.id);
         return hcb.toHashCode();
     }
 
-    /**
-     * @see Object#equals(Object)
-     */
     @Override
     public boolean equals(Object obj) {
         boolean equals = false;
         if (IndieUsers.class.isInstance(obj)) {
             IndieUsers indieUsers= IndieUsers.class.cast(obj);
             EqualsBuilder eb = new EqualsBuilder();
-            eb.append(this.indieUserId, indieUsers.getIndieUserId());
+            eb.append(this.id, indieUsers.getId());
             equals = eb.isEquals();
         }
         return equals;
     }
 
-    /**
-     * @see Object#toString()
-     */
     @Override
     public String toString() {
         return ReflectionToStringBuilder.toString(this);
     }
-
 }

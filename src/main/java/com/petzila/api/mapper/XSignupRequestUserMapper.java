@@ -1,7 +1,7 @@
 package com.petzila.api.mapper;
 
 import com.petzila.api.domain.User;
-import com.petzila.api.model.XSignupRequest;
+import com.petzila.api.model.XSignUp;
 import org.dozer.DozerBeanMapperSingletonWrapper;
 import org.dozer.Mapper;
 
@@ -12,22 +12,20 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class XSignupRequestUserMapper {
-    private Mapper mapper= DozerBeanMapperSingletonWrapper.getInstance();
+    private Mapper mapper = DozerBeanMapperSingletonWrapper.getInstance();
 
-    public User convertFrom(XSignupRequest signupRequest){
-        User user = mapper.map(signupRequest, User.class);
-        if(signupRequest.getName()!=null){
-            user.setFirstName(signupRequest.getName().getFirstName());
-            user.setLastName(signupRequest.getName().getLastName());
+    public User convertFrom(XSignUp signUp) {
+        User user = mapper.map(signUp, User.class);
+        if (signUp.getName() != null) {
+            user.setFirstName(signUp.getName().getFirstName());
+            user.setLastName(signUp.getName().getLastName());
         }
 
-        if(signupRequest.getLocation()!=null){
-            user.setCountry(signupRequest.getLocation().getCountry());
-            user.setCity(signupRequest.getLocation().getCity());
-            user.setZipCode(signupRequest.getLocation().getZipCode());
+        if (signUp.getLocation() != null) {
+            user.setCountry(signUp.getLocation().getCountry());
+            user.setCity(signUp.getLocation().getCity());
+            user.setZipCode(signUp.getLocation().getZipCode());
         }
         return user;
-
     }
-
 }

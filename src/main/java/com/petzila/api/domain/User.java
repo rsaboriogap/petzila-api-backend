@@ -1,36 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.petzila.api.domain;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-/**
- *
- * @author vicente
- */
 @Entity
 @Table(name = "user", catalog = "petzila", schema = "")
 public class User implements Serializable {
@@ -39,11 +16,11 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "user_id")
-    private Long userId;
+    private long id;
     @Column(name = "activation_key")
     private String activationKey;
     @Basic(optional = false)
-    @Column(name = "active")
+    @Column(name = "active") //@TODO is_active en la BD
     private boolean active;
     @Basic(optional = false)
     @Column(name = "is_founder")
@@ -58,7 +35,7 @@ public class User implements Serializable {
     @Column(name = "salt")
     private String salt;
     @Basic(optional = false)
-    @Column(name = "signup_type")
+    @Column(name = "signup_type") //@TODO enumerado?
     private String signupType;
     @Basic(optional = false)
     @Column(name = "first_name")
@@ -80,52 +57,30 @@ public class User implements Serializable {
     @Column(name = "zip_code")
     private Integer zipCode;
     @Column(name = "updated_at")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.DATE) //@TODO TIMESTAMP
     private Date updatedAt;
     @Column(name = "temporal_password")
     private String temporalPassword;
     @Column(name = "social_network_id")
     private String socialNetworkId;
     @Column(name = "temporal_password_expiration")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.DATE) //@TODO TIMESTAMP
     private Date temporalPasswordExpiration;
     @Column(name = "facebook_token")
     private String facebookToken;
     @Column(name = "merge_type")
-    private String mergeType;
+    private String mergeType; //@TODO enumerado?
     @Basic(optional = false)
     @Column(name = "created_at")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.DATE) //@TODO TIMESTAMP
     private Date createdAt;
 
-
-    public User() {
+    public long getId() {
+        return id;
     }
 
-    public User(Long userId) {
-        this.userId = userId;
-    }
-
-    public User(Long userId, boolean active, boolean isFounder, String username, String password, String salt, String signupType, String firstName, String lastName, String email, Date createdAt) {
-        this.userId = userId;
-        this.active = active;
-        this.isFounder = isFounder;
-        this.username = username;
-        this.password = password;
-        this.salt = salt;
-        this.signupType = signupType;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.createdAt = createdAt;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getActivationKey() {
@@ -136,7 +91,7 @@ public class User implements Serializable {
         this.activationKey = activationKey;
     }
 
-    public boolean getActive() {
+    public boolean isActive() {
         return active;
     }
 
@@ -144,7 +99,7 @@ public class User implements Serializable {
         this.active = active;
     }
 
-    public boolean getIsFounder() {
+    public boolean isFounder() {
         return isFounder;
     }
 
@@ -307,28 +262,22 @@ public class User implements Serializable {
     @Override
     public int hashCode() {
         HashCodeBuilder hcb = new HashCodeBuilder();
-        hcb.append(this.userId);
+        hcb.append(this.id);
         return hcb.toHashCode();
     }
 
-    /**
-     * @see Object#equals(Object)
-     */
     @Override
     public boolean equals(Object obj) {
         boolean equals = false;
         if (User.class.isInstance(obj)) {
-            User user= User.class.cast(obj);
+            User user = User.class.cast(obj);
             EqualsBuilder eb = new EqualsBuilder();
-            eb.append(this.userId, user.getUserId());
+            eb.append(this.id, user.getId());
             equals = eb.isEquals();
         }
         return equals;
     }
 
-    /**
-     * @see Object#toString()
-     */
     @Override
     public String toString() {
         return ReflectionToStringBuilder.toString(this);

@@ -4,7 +4,6 @@ import com.petzila.api.domain.User;
 import com.petzila.api.service.user.UserFinderService;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
@@ -18,7 +17,7 @@ public class UserFinderServiceImpl implements UserFinderService {
     @Override
     public User getById(long id) {
         try {
-            return (User) em.createQuery("SELECT u FROM User u WHERE u.userId=?1").setParameter(1, id).getSingleResult();
+            return (User) em.createQuery("SELECT u FROM User u WHERE u.id=?1").setParameter(1, id).getSingleResult();
         }catch(NoResultException nrex){
             return null;
         }

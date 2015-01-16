@@ -1,35 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.petzila.api.domain;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-/**
- *
- * @author vicente
- */
 @Entity
 @Table(name = "comment", catalog = "petzila", schema = "")
 public class Comment implements Serializable {
@@ -38,7 +16,7 @@ public class Comment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "comment_id")
-    private Long commentId;
+    private long id;
     @Basic(optional = false)
     @Column(name = "description")
     private String description;
@@ -48,30 +26,17 @@ public class Comment implements Serializable {
     private Date createdAt;
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private User userId;
+    private User user;
     @JoinColumn(name = "post_id", referencedColumnName = "post_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Post postId;
+    private Post post;
 
-    public Comment() {
+    public long getId() {
+        return id;
     }
 
-    public Comment(Long commentId) {
-        this.commentId = commentId;
-    }
-
-    public Comment(Long commentId, String description, Date createdAt) {
-        this.commentId = commentId;
-        this.description = description;
-        this.createdAt = createdAt;
-    }
-
-    public Long getCommentId() {
-        return commentId;
-    }
-
-    public void setCommentId(Long commentId) {
-        this.commentId = commentId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -90,50 +55,43 @@ public class Comment implements Serializable {
         this.createdAt = createdAt;
     }
 
-    public User getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Post getPostId() {
-        return postId;
+    public Post getPost() {
+        return post;
     }
 
-    public void setPostId(Post postId) {
-        this.postId = postId;
+    public void setPost(Post post) {
+        this.post = post;
     }
 
     @Override
     public int hashCode() {
         HashCodeBuilder hcb = new HashCodeBuilder();
-        hcb.append(this.commentId);
+        hcb.append(this.id);
         return hcb.toHashCode();
     }
 
-    /**
-     * @see Object#equals(Object)
-     */
     @Override
     public boolean equals(Object obj) {
         boolean equals = false;
         if (Comment.class.isInstance(obj)) {
-            Comment comment= Comment.class.cast(obj);
+            Comment comment = Comment.class.cast(obj);
             EqualsBuilder eb = new EqualsBuilder();
-            eb.append(this.commentId, comment.getCommentId());
+            eb.append(this.id, comment.getId());
             equals = eb.isEquals();
         }
         return equals;
     }
 
-    /**
-     * @see Object#toString()
-     */
     @Override
     public String toString() {
         return ReflectionToStringBuilder.toString(this);
     }
-    
 }

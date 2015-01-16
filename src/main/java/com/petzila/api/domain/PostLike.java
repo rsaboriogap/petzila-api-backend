@@ -1,32 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.petzila.api.domain;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 
-/**
- *
- * @author vicente
- */
 @Entity
 @Table(name = "post_like", catalog = "petzila", schema = "")
 public class PostLike implements Serializable {
@@ -35,70 +15,57 @@ public class PostLike implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "post_like_id")
-    private Long postLikeId;
+    private long id;
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private User userId;
+    private User user;
     @JoinColumn(name = "post_id", referencedColumnName = "post_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Post postId;
+    private Post post;
 
-    public PostLike() {
+    public long getId() {
+        return id;
     }
 
-    public PostLike(Long postLikeId) {
-        this.postLikeId = postLikeId;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public Long getPostLikeId() {
-        return postLikeId;
+    public User getUser() {
+        return user;
     }
 
-    public void setPostLikeId(Long postLikeId) {
-        this.postLikeId = postLikeId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public User getUserId() {
-        return userId;
+    public Post getPost() {
+        return post;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
-    }
-
-    public Post getPostId() {
-        return postId;
-    }
-
-    public void setPostId(Post postId) {
-        this.postId = postId;
+    public void setPost(Post post) {
+        this.post = post;
     }
 
     @Override
     public int hashCode() {
         HashCodeBuilder hcb = new HashCodeBuilder();
-        hcb.append(this.postLikeId);
+        hcb.append(this.id);
         return hcb.toHashCode();
     }
 
-    /**
-     * @see Object#equals(Object)
-     */
     @Override
     public boolean equals(Object obj) {
         boolean equals = false;
         if (PostLike.class.isInstance(obj)) {
             PostLike postLike= PostLike.class.cast(obj);
             EqualsBuilder eb = new EqualsBuilder();
-            eb.append(this.postLikeId, postLike.getPostLikeId());
+            eb.append(this.id, postLike.getId());
             equals = eb.isEquals();
         }
         return equals;
     }
 
-    /**
-     * @see Object#toString()
-     */
     @Override
     public String toString() {
         return ReflectionToStringBuilder.toString(this);
