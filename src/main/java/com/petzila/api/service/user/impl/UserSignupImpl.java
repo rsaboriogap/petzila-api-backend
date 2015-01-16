@@ -45,7 +45,6 @@ public class UserSignupImpl implements UserSignupService{
                 if(!StringUtils.isBlank(dbUser.getSocialNetworkId())){
                     throw new ValidationException(664);
                 }
-
                 throw new ValidationException(619);
             }else{
                 try {

@@ -50,8 +50,6 @@ public class UserSignupResourceImpl implements UserSignupResource {
             throw new ValidationException(625);
         }else if(!StringUtils.isBlank(signupRequest.getFacebookToken())&& signupRequest.getFacebookTokenType() == null){
             throw new ValidationException(661);
-        }else if(!StringUtils.isBlank(signupRequest.getFacebookToken()) && signupRequest.getFacebookTokenType() == null){
-            throw new ValidationException(663);
         }else if(signupRequest.getUsername().length() < 2 || signupRequest.getUsername().length() > 20 ){
             throw new ValidationException(616);
         }else if(signupRequest.getName() !=null && !StringUtils.isBlank(signupRequest.getName().getFirstName()) && (signupRequest.getName().getFirstName().length() < 2 || signupRequest.getName().getFirstName().length() > 70)){
