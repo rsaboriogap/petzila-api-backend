@@ -4,10 +4,8 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <jta-data-source>jdbc/petzila</jta-data-source>
 
-        <mapping-file>META-INF/queries/identity-finder-queries.xml</mapping-file>
         <mapping-file>META-INF/queries/user-finder-queries.xml</mapping-file>
 
-        <mapping-file>META-INF/queries/identity-service-queries.xml</mapping-file>
         <mapping-file>META-INF/queries/user-service-queries.xml</mapping-file>
 
         <properties>
