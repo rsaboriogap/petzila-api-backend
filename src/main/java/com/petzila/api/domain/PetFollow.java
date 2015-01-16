@@ -39,7 +39,7 @@ public class PetFollow implements Serializable {
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User userId;
-    @JoinColumn(name = "pet_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "pet_id", referencedColumnName = "pet_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Pet petId;
 
@@ -103,5 +103,4 @@ public class PetFollow implements Serializable {
     public String toString() {
         return ReflectionToStringBuilder.toString(this);
     }
-    
 }

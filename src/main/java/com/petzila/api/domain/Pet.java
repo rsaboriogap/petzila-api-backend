@@ -244,5 +244,4 @@ public class Pet implements Serializable {
     public String toString() {
         return ReflectionToStringBuilder.toString(this);
     }
-    
 }

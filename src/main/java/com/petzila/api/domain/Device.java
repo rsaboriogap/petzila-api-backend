@@ -121,4 +121,5 @@ public class Device implements Serializable {
         return ReflectionToStringBuilder.toString(this);
     }
 
+
 }

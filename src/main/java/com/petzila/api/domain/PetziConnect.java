@@ -143,5 +143,4 @@ public class PetziConnect implements Serializable {
     public String toString() {
         return ReflectionToStringBuilder.toString(this);
     }
-
 }

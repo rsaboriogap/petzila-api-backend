@@ -51,13 +51,10 @@ public class Post implements Serializable {
     @Column(name = "updated_at")
     @Temporal(TemporalType.DATE)
     private Date updatedAt;
-    @Basic(optional = false)
     @Column(name = "created_at")
     @Temporal(TemporalType.DATE)
     private Date createdAt;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "postId", fetch = FetchType.LAZY)
-    private Collection<Notification> notificationCollection;
-    @JoinColumn(name = "pet_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "pet_id", referencedColumnName = "pet_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Pet petId;
 
@@ -68,11 +65,10 @@ public class Post implements Serializable {
         this.postId = postId;
     }
 
-    public Post(Long postId, String description, String contentUrl, Date createdAt) {
+    public Post(Long postId, String description, String contentUrl) {
         this.postId = postId;
         this.description = description;
         this.contentUrl = contentUrl;
-        this.createdAt = createdAt;
     }
 
     public Long getPostId() {
@@ -115,14 +111,6 @@ public class Post implements Serializable {
         this.createdAt = createdAt;
     }
 
-    public Collection<Notification> getNotificationCollection() {
-        return notificationCollection;
-    }
-
-    public void setNotificationCollection(Collection<Notification> notificationCollection) {
-        this.notificationCollection = notificationCollection;
-    }
-
     public Pet getPetId() {
         return petId;
     }
@@ -161,5 +149,4 @@ public class Post implements Serializable {
     public String toString() {
         return ReflectionToStringBuilder.toString(this);
     }
-    
 }

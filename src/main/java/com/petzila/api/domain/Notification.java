@@ -44,7 +44,7 @@ public class Notification implements Serializable {
     @Basic(optional = false)
     @Column(name = "status")
     private String status;
-    @JoinColumn(name = "pet_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "pet_id", referencedColumnName = "pet_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Pet petId;
     @JoinColumn(name = "post_id", referencedColumnName = "post_id")

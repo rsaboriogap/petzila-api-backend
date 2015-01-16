@@ -98,6 +98,7 @@ public class User implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date createdAt;
 
+
     public User() {
     }
 
@@ -303,7 +304,6 @@ public class User implements Serializable {
         this.createdAt = createdAt;
     }
 
-
     @Override
     public int hashCode() {
         HashCodeBuilder hcb = new HashCodeBuilder();
@@ -333,5 +333,4 @@ public class User implements Serializable {
     public String toString() {
         return ReflectionToStringBuilder.toString(this);
     }
-    
 }
