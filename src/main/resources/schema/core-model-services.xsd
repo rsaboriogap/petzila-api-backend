@@ -2,126 +2,92 @@
 <xsd:schema targetNamespace="urn:com/petzila/api/model"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
             xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+            xmlns="urn:com/petzila/api/model"
             jaxb:version="2.0">
 
-    <!--System objects for handling responses: BEGIN-->
-    <xsd:element name="XResult">
+    <!--REQUESTS-->
+    <!--SIGNUP-->
+    <xsd:element name="XSignupRequest">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element name="result" type="xsd:anyType" minOccurs="1" maxOccurs="1"/>
+                <xsd:element name="email" type="xsd:string"/>
+                <xsd:element name="password" type="xsd:string"/>
+                <xsd:element name="username" type="xsd:string"/>
+                <xsd:element name="profilePicture" type="xsd:string"/>
+                <xsd:element name="resourceType" type="XResourceType"/>
+                <xsd:element name="description" type="xsd:string"/>
+                <xsd:element name="name" type="XName"/>
+                <xsd:element name="location" type="XLocation"/>
+                <xsd:element name="signupType" type="XSignupType"/>
+                <xsd:element name="socialNetworkID" type="xsd:string"/>
+                <xsd:element name="facebookToken" type="xsd:string"/>
+                <xsd:element name="facebookTokenType" type="XFacebookTokenType"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
 
-    <xsd:element name="XError">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element name="message" type="xsd:string" minOccurs="1" maxOccurs="1"/>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:complexType name="XIds">
+    <xsd:complexType name="XName">
         <xsd:sequence>
-            <xsd:element name="ids" type="xsd:long" minOccurs="1" maxOccurs="unbounded"/>
-        </xsd:sequence>
-    </xsd:complexType>
-    <!--System objects for handling responses: END-->
-
-
-    <xsd:element name="XPasswordRequest">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element name="email" type="xsd:string" minOccurs="1" maxOccurs="1"/>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="XPasswordReset">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element name="reset_code" type="xsd:string" minOccurs="1" maxOccurs="1"/>
-                <xsd:element name="email" type="xsd:string" minOccurs="1" maxOccurs="1"/>
-                <xsd:element name="new_password" type="xsd:string" minOccurs="1" maxOccurs="1"/>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="XPassword">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element name="current_password" type="xsd:string" minOccurs="1" maxOccurs="1"/>
-                <xsd:element name="new_password" type="xsd:string" minOccurs="1" maxOccurs="1"/>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-
-    <!--<xsd:simpleType name="XDeviceType">-->
-        <!--<xsd:restriction base="xsd:string">-->
-            <!--<xsd:enumeration value="ANDROID"/>-->
-            <!--<xsd:enumeration value="IOS"/>-->
-        <!--</xsd:restriction>-->
-    <!--</xsd:simpleType>-->
-
-    <!--<xsd:complexType name="XDevice">-->
-        <!--<xsd:sequence>-->
-            <!--<xsd:element name="device_type" type="XDeviceType" minOccurs="1" maxOccurs="1"/>-->
-            <!--<xsd:element name="regid" minOccurs="1" maxOccurs="1">-->
-                <!--<xsd:simpleType>-->
-                    <!--<xsd:restriction base="xsd:string">-->
-                        <!--<xsd:minLength value="1"/>-->
-                        <!--<xsd:maxLength value="255"/>-->
-                    <!--</xsd:restriction>-->
-                <!--</xsd:simpleType>-->
-            <!--</xsd:element>-->
-        <!--</xsd:sequence>-->
-    <!--</xsd:complexType>-->
-
-    <xsd:element name="XIdentity">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element name="auth_token" type="xsd:string" minOccurs="1" maxOccurs="1"/>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="XSignUp">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element name="email" type="xsd:string" minOccurs="1" maxOccurs="1"/>
-                <xsd:element name="password" type="xsd:string" minOccurs="1" maxOccurs="1"/>
-                <xsd:element name="first_name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
-                <xsd:element name="last_name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
-                <xsd:element name="mobile_number" type="xsd:long" minOccurs="0" maxOccurs="1"/>
-                <xsd:element name="locale_id" type="xsd:string" minOccurs="0" maxOccurs="1"/>
-                <xsd:element name="time_zone_id" type="xsd:string" minOccurs="0" maxOccurs="1"/>
-                <xsd:element name="country_iso_2_letter_code" type="xsd:string" minOccurs="1" maxOccurs="1"/>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:complexType name="XUser">
-        <xsd:sequence>
-            <xsd:element name="id" type="xsd:long" minOccurs="1" maxOccurs="1"/>
-            <xsd:element name="first_name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
-            <xsd:element name="last_name" type="xsd:string" minOccurs="0" maxOccurs="1"/>
-            <xsd:element name="image_url" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="firstName" type="xsd:string"/>
+            <xsd:element name="lastName" type="xsd:string" />
         </xsd:sequence>
     </xsd:complexType>
 
-    <xsd:complexType name="XTimeZone">
-        <!--readonly-->
+    <xsd:complexType name="XLocation">
         <xsd:sequence>
-            <xsd:element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"/>
-            <xsd:element name="name" minOccurs="1" maxOccurs="1">
-                <xsd:simpleType>
-                    <xsd:restriction base="xsd:string">
-                        <xsd:minLength value="1"/>
-                        <xsd:maxLength value="100"/>
-                    </xsd:restriction>
-                </xsd:simpleType>
-            </xsd:element>
-            <xsd:element name="offset" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="country" type="xsd:string"/>
+            <xsd:element name="city" type="xsd:string"/>
+            <xsd:element name="zipCode" type="xsd:int"/>
         </xsd:sequence>
     </xsd:complexType>
+    <!--END SIGNUP-->
+
+
+
+    <!--RESPONSES-->
+    <xsd:element name="XPetzilaResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="status" type="XResponseType"/>
+                <xsd:element name="message" type="xsd:string"/>
+                <xsd:element name="code" type="xsd:int"/>
+                <xsd:element name="data" type="xsd:anyType"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+
+
+    <!--ENUMS-->
+    <xsd:simpleType name="XSignupType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="local"/>
+            <xsd:enumeration value="facebook"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="XResourceType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="image/gif"/>
+            <xsd:enumeration value="image/jpeg"/>
+            <xsd:enumeration value="image/png"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="XFacebookTokenType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="shortTerm"/>
+            <xsd:enumeration value="longTerm"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="XResponseType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Fail"/>
+            <xsd:enumeration value="Success"/>
+            <xsd:enumeration value="Error"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+
 </xsd:schema>

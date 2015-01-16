@@ -1,7 +1,9 @@
 package com.petzila.api.exception.mapper;
 
 import com.petzila.api.exception.ServiceException;
-import com.petzila.api.model.XError;
+import com.petzila.api.model.XPetzilaResponse;
+import com.petzila.api.model.XResponseType;
+import com.petzila.api.utils.ApiUtils;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
@@ -9,13 +11,20 @@ import javax.ws.rs.ext.Provider;
 
 @Provider
 public class ServiceExceptionMapper implements ExceptionMapper<ServiceException> {
-//    @Inject
-//    private ServiceMessages serviceMessages;
 
     @Override
     public Response toResponse(ServiceException se) {
-        XError xe = new XError();
-//        xe.setMessage(serviceMessages.getMessage(se.getMessage(), se.getArguments()));
-        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(xe).build();
+        XPetzilaResponse petzilaResponse = new XPetzilaResponse();
+
+        if( se.getCode()!= null){
+            petzilaResponse.setMessage(ApiUtils.getError(se.getCode()+""));
+        }else{
+            petzilaResponse.setMessage(ApiUtils.getError("920"));
+        }
+
+        petzilaResponse.setCode(se.getCode());
+        petzilaResponse.setStatus(XResponseType.ERROR);
+
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(petzilaResponse).build();
     }
 }
