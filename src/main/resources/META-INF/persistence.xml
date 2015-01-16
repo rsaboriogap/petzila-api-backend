@@ -4,9 +4,20 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <jta-data-source>jdbc/petzila</jta-data-source>
 
-        <mapping-file>META-INF/queries/user-finder-queries.xml</mapping-file>
+        <class>com.petzila.api.domain.Comment</class>
+        <class>com.petzila.api.domain.Device</class>
+        <class>com.petzila.api.domain.IndieUsers</class>
+        <class>com.petzila.api.domain.Notification</class>
+        <class>com.petzila.api.domain.Pet</class>
+        <class>com.petzila.api.domain.PetFollow</class>
+        <class>com.petzila.api.domain.PetziConnect</class>
+        <class>com.petzila.api.domain.Post</class>
+        <class>com.petzila.api.domain.PostLike</class>
+        <class>com.petzila.api.domain.PostReport</class>
+        <class>com.petzila.api.domain.SessionRequest</class>
+        <class>com.petzila.api.domain.User</class>
 
-        <mapping-file>META-INF/queries/user-service-queries.xml</mapping-file>
+        <!--<mapping-file>META-INF/queries/user-finder-queries.xml</mapping-file>-->
 
         <properties>
             <property name="hibernate.connection.datasource" value="jdbc/petzila" />
