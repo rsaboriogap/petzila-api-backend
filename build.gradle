@@ -33,6 +33,10 @@ ext {
     jaxbXjc = '2.2.7-b41'
     jaxbApi = '2.2.7'
     hibernateEntityManager = '4.3.8.Final'
+    dozer= '5.5.1'
+    cloudinary = '1.0.14'
+    commonsValidator = '1.4.0'
+    commonsLang = '3.3.2'
 }
 
 dependencies {
@@ -49,6 +53,16 @@ dependencies {
     compile "org.hibernate:hibernate-entitymanager:$hibernateEntityManager"
     // Hibernate Metamodel Generator
     compile "org.hibernate:hibernate-jpamodelgen:$hibernateEntityManager"
+
+    //COMMONS
+    compile "org.apache.commons:commons-lang3:$commonsLang"
+    compile "commons-validator:commons-validator:$commonsValidator"
+
+    //CLOUDINARY
+    compile "com.cloudinary:cloudinary:$cloudinary"
+
+    //DOZER
+    compile "net.sf.dozer:dozer:$dozer"
 }
 
 task wrapper(type: Wrapper) {
