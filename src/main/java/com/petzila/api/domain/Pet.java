@@ -1,5 +1,8 @@
 package com.petzila.api.domain;
 
+import com.petzila.api.model.XGenderType;
+import com.petzila.api.model.XPetAge;
+import com.petzila.api.model.XPetSize;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
@@ -19,36 +22,39 @@ public class Pet implements Serializable {
     private long id;
     @Column(name = "name")
     private String name;
+    @Enumerated(EnumType.STRING)
     @Basic(optional = false)
     @Column(name = "age")
-    private String age;
+    private XPetAge age=XPetAge.ZERO_THREE;
     @Basic(optional = false)
     @Column(name = "species")
     private String species;
+    @Enumerated(EnumType.STRING)
     @Basic(optional = false)
-    @Column(name = "size") //@TODO enumerado?
-    private String size;
+    @Column(name = "size")
+    private XPetSize size =XPetSize.SMALL;
     @Column(name = "profile_picture")
     private String profilePicture;
     @Column(name = "description")
     private String description;
-    @Column(name = "breed") //@TODO enumerado?
+    @Column(name = "breed")
     private String breed;
     @Column(name = "other")
     private String other;
+    @Enumerated(EnumType.STRING)
     @Basic(optional = false)
-    @Column(name = "gender") //@TODO enumerado?
-    private String gender;
-    @Column(name = "food") //@TODO enumerado?
+    @Column(name = "gender")
+    private XGenderType gender = XGenderType.MALE;
+    @Column(name = "food")
     private String food;
     @Column(name = "website")
     private String website;
     @Column(name = "updated_at")
-    @Temporal(TemporalType.DATE) //@TODO es DATE o TIMESTAMP??
+    @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
     @Basic(optional = false)
     @Column(name = "created_at")
-    @Temporal(TemporalType.DATE) //@TODO es DATE o TIMESTAMP??
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
     @JoinColumn(name = "owner", referencedColumnName = "user_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
@@ -58,8 +64,8 @@ public class Pet implements Serializable {
         return id;
     }
 
-    public void setId(long petId) {
-        this.id = petId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -70,11 +76,11 @@ public class Pet implements Serializable {
         this.name = name;
     }
 
-    public String getAge() {
+    public XPetAge getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(XPetAge age) {
         this.age = age;
     }
 
@@ -86,11 +92,11 @@ public class Pet implements Serializable {
         this.species = species;
     }
 
-    public String getSize() {
+    public XPetSize getSize() {
         return size;
     }
 
-    public void setSize(String size) {
+    public void setSize(XPetSize size) {
         this.size = size;
     }
 
@@ -126,11 +132,11 @@ public class Pet implements Serializable {
         this.other = other;
     }
 
-    public String getGender() {
+    public XGenderType getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(XGenderType gender) {
         this.gender = gender;
     }
 

@@ -24,10 +24,10 @@ public class Post implements Serializable {
     @Column(name = "content_url")
     private String contentUrl;
     @Column(name = "updated_at")
-    @Temporal(TemporalType.DATE) //@TODO TIMESTAMP?
+    @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
     @Column(name = "created_at")
-    @Temporal(TemporalType.DATE) //@TODO TIMESTAMP?
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
     @JoinColumn(name = "pet_id", referencedColumnName = "pet_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)

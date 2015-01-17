@@ -1,5 +1,6 @@
 package com.petzila.api.domain;
 
+import com.petzila.api.model.XNotificationType;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
@@ -16,14 +17,15 @@ public class Notification implements Serializable {
     @Basic(optional = false)
     @Column(name = "notification_id")
     private long id;
+    @Enumerated(EnumType.STRING)
     @Basic(optional = false)
     @Column(name = "type")
-    private String type; //@TODO enumerado??
+    private XNotificationType type = XNotificationType.COMMENT;
     @Column(name = "description")
     private String description;
     @Basic(optional = false)
-    @Column(name = "status") //@TODO enumerado?
-    private String status;
+    @Column(name = "is_pending")
+    private boolean isPending;
     @JoinColumn(name = "pet_id", referencedColumnName = "pet_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Pet pet;
@@ -45,11 +47,11 @@ public class Notification implements Serializable {
         this.id = id;
     }
 
-    public String getType() {
+    public XNotificationType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(XNotificationType type) {
         this.type = type;
     }
 
@@ -61,12 +63,12 @@ public class Notification implements Serializable {
         this.description = description;
     }
 
-    public String getStatus() {
-        return status;
+    public boolean isPending() {
+        return isPending;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setPending(boolean isPending) {
+        this.isPending = isPending;
     }
 
     public Pet getPet() {

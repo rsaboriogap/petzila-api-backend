@@ -66,6 +66,47 @@
         </xsd:restriction>
     </xsd:simpleType>
 
+    <xsd:simpleType name="XMergeType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="local"/>
+            <xsd:enumeration value="facebook"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="XNotificationType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="like"/>
+            <xsd:enumeration value="comment"/>
+            <xsd:enumeration value="follow"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="XGenderType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="male"/>
+            <xsd:enumeration value="female"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="XPetSize">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="small"/>
+            <xsd:enumeration value="medium"/>
+            <xsd:enumeration value="large"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="XPetAge">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="zero-three"/>
+            <xsd:enumeration value="three-five"/>
+            <xsd:enumeration value="five-ten"/>
+            <xsd:enumeration value="ten-fifthteen"/>
+            <xsd:enumeration value="fifthteen-more"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+
     <xsd:simpleType name="XResourceType">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="image/gif"/>

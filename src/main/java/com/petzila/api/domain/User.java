@@ -1,5 +1,7 @@
 package com.petzila.api.domain;
 
+import com.petzila.api.model.XMergeType;
+import com.petzila.api.model.XSignupType;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
@@ -20,8 +22,8 @@ public class User implements Serializable {
     @Column(name = "activation_key")
     private String activationKey;
     @Basic(optional = false)
-    @Column(name = "active") //@TODO is_active en la BD
-    private boolean active;
+    @Column(name = "is_active")
+    private boolean isActive;
     @Basic(optional = false)
     @Column(name = "is_founder")
     private boolean isFounder;
@@ -34,9 +36,10 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "salt")
     private String salt;
+    @Enumerated(EnumType.STRING)
     @Basic(optional = false)
-    @Column(name = "signup_type") //@TODO enumerado?
-    private String signupType;
+    @Column(name = "signup_type")
+    private XSignupType signupType=XSignupType.LOCAL;
     @Basic(optional = false)
     @Column(name = "first_name")
     private String firstName;
@@ -57,22 +60,23 @@ public class User implements Serializable {
     @Column(name = "zip_code")
     private Integer zipCode;
     @Column(name = "updated_at")
-    @Temporal(TemporalType.DATE) //@TODO TIMESTAMP
+    @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
     @Column(name = "temporal_password")
     private String temporalPassword;
     @Column(name = "social_network_id")
     private String socialNetworkId;
     @Column(name = "temporal_password_expiration")
-    @Temporal(TemporalType.DATE) //@TODO TIMESTAMP
+    @Temporal(TemporalType.TIMESTAMP)
     private Date temporalPasswordExpiration;
     @Column(name = "facebook_token")
     private String facebookToken;
+    @Enumerated(EnumType.STRING)
     @Column(name = "merge_type")
-    private String mergeType; //@TODO enumerado?
+    private XMergeType mergeType = XMergeType.LOCAL;
     @Basic(optional = false)
     @Column(name = "created_at")
-    @Temporal(TemporalType.DATE) //@TODO TIMESTAMP
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
     public long getId() {
@@ -92,18 +96,18 @@ public class User implements Serializable {
     }
 
     public boolean isActive() {
-        return active;
+        return isActive;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setActive(boolean isActive) {
+        this.isActive = isActive;
     }
 
     public boolean isFounder() {
         return isFounder;
     }
 
-    public void setIsFounder(boolean isFounder) {
+    public void setFounder(boolean isFounder) {
         this.isFounder = isFounder;
     }
 
@@ -131,11 +135,11 @@ public class User implements Serializable {
         this.salt = salt;
     }
 
-    public String getSignupType() {
+    public XSignupType getSignupType() {
         return signupType;
     }
 
-    public void setSignupType(String signupType) {
+    public void setSignupType(XSignupType signupType) {
         this.signupType = signupType;
     }
 
@@ -243,11 +247,11 @@ public class User implements Serializable {
         this.facebookToken = facebookToken;
     }
 
-    public String getMergeType() {
+    public XMergeType getMergeType() {
         return mergeType;
     }
 
-    public void setMergeType(String mergeType) {
+    public void setMergeType(XMergeType mergeType) {
         this.mergeType = mergeType;
     }
 
