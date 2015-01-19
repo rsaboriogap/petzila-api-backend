@@ -1,6 +1,5 @@
 package com.petzila.api.domain;
 
-import com.petzila.api.model.XNotificationType;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
@@ -20,7 +19,7 @@ public class Notification implements Serializable {
     @Enumerated(EnumType.STRING)
     @Basic(optional = false)
     @Column(name = "type")
-    private XNotificationType type = XNotificationType.COMMENT;
+    private NotificationType type = NotificationType.COMMENT;
     @Column(name = "description")
     private String description;
     @Basic(optional = false)
@@ -47,11 +46,11 @@ public class Notification implements Serializable {
         this.id = id;
     }
 
-    public XNotificationType getType() {
+    public NotificationType getType() {
         return type;
     }
 
-    public void setType(XNotificationType type) {
+    public void setType(NotificationType type) {
         this.type = type;
     }
 

@@ -1,7 +1,5 @@
 package com.petzila.api.domain;
 
-import com.petzila.api.model.XMergeType;
-import com.petzila.api.model.XSignupType;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
@@ -39,7 +37,7 @@ public class User implements Serializable {
     @Enumerated(EnumType.STRING)
     @Basic(optional = false)
     @Column(name = "signup_type")
-    private XSignupType signupType=XSignupType.LOCAL;
+    private SignUpType signupType = SignUpType.LOCAL;
     @Basic(optional = false)
     @Column(name = "first_name")
     private String firstName;
@@ -73,7 +71,7 @@ public class User implements Serializable {
     private String facebookToken;
     @Enumerated(EnumType.STRING)
     @Column(name = "merge_type")
-    private XMergeType mergeType = XMergeType.LOCAL;
+    private MergeType mergeType = MergeType.LOCAL;
     @Basic(optional = false)
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
@@ -135,11 +133,11 @@ public class User implements Serializable {
         this.salt = salt;
     }
 
-    public XSignupType getSignupType() {
+    public SignUpType getSignupType() {
         return signupType;
     }
 
-    public void setSignupType(XSignupType signupType) {
+    public void setSignupType(SignUpType signupType) {
         this.signupType = signupType;
     }
 
@@ -247,11 +245,11 @@ public class User implements Serializable {
         this.facebookToken = facebookToken;
     }
 
-    public XMergeType getMergeType() {
+    public MergeType getMergeType() {
         return mergeType;
     }
 
-    public void setMergeType(XMergeType mergeType) {
+    public void setMergeType(MergeType mergeType) {
         this.mergeType = mergeType;
     }
 

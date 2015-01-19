@@ -7,9 +7,6 @@ import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import javax.persistence.*;
 import java.io.Serializable;
 
-/**
- * Created by vicente on 17/01/15.
- */
 @Entity
 @Table(name = "publish_point", catalog = "petzila", schema = "")
 public class PublishPoint implements Serializable {
@@ -18,7 +15,7 @@ public class PublishPoint implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "publish_point_id")
-    private Long publishPointId;
+    private long id;
     @Basic(optional = false)
     @Column(name = "os")
     private String os;
@@ -27,27 +24,14 @@ public class PublishPoint implements Serializable {
     private String publishPoint;
     @JoinColumn(name = "session_request_id", referencedColumnName = "session_request_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private SessionRequest sessionRequestId;
+    private SessionRequest sessionRequest;
 
-    public PublishPoint() {
+    public long getId() {
+        return id;
     }
 
-    public PublishPoint(Long publishPointId) {
-        this.publishPointId = publishPointId;
-    }
-
-    public PublishPoint(Long publishPointId, String os, String publishPoint) {
-        this.publishPointId = publishPointId;
-        this.os = os;
-        this.publishPoint = publishPoint;
-    }
-
-    public Long getPublishPointId() {
-        return publishPointId;
-    }
-
-    public void setPublishPointId(Long publishPointId) {
-        this.publishPointId = publishPointId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getOs() {
@@ -66,18 +50,18 @@ public class PublishPoint implements Serializable {
         this.publishPoint = publishPoint;
     }
 
-    public SessionRequest getSessionRequestId() {
-        return sessionRequestId;
+    public SessionRequest getSessionRequest() {
+        return sessionRequest;
     }
 
-    public void setSessionRequestId(SessionRequest sessionRequestId) {
-        this.sessionRequestId = sessionRequestId;
+    public void setSessionRequest(SessionRequest sessionRequest) {
+        this.sessionRequest = sessionRequest;
     }
 
     @Override
     public int hashCode() {
         HashCodeBuilder hcb = new HashCodeBuilder();
-        hcb.append(this.publishPointId);
+        hcb.append(this.id);
         return hcb.toHashCode();
     }
 
@@ -87,7 +71,7 @@ public class PublishPoint implements Serializable {
         if (PublishPoint.class.isInstance(obj)) {
             PublishPoint publishPoint = PublishPoint.class.cast(obj);
             EqualsBuilder eb = new EqualsBuilder();
-            eb.append(this.publishPointId, publishPoint.getPublishPointId());
+            eb.append(this.id, publishPoint.getId());
             equals = eb.isEquals();
         }
         return equals;

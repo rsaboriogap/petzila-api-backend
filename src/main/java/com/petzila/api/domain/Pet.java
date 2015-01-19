@@ -1,7 +1,6 @@
 package com.petzila.api.domain;
 
 import com.petzila.api.model.XGenderType;
-import com.petzila.api.model.XPetAge;
 import com.petzila.api.model.XPetSize;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -25,14 +24,14 @@ public class Pet implements Serializable {
     @Enumerated(EnumType.STRING)
     @Basic(optional = false)
     @Column(name = "age")
-    private XPetAge age=XPetAge.ZERO_THREE;
+    private PetAge age = PetAge.ZERO_THREE;
     @Basic(optional = false)
     @Column(name = "species")
     private String species;
     @Enumerated(EnumType.STRING)
     @Basic(optional = false)
     @Column(name = "size")
-    private XPetSize size =XPetSize.SMALL;
+    private XPetSize size = XPetSize.SMALL;
     @Column(name = "profile_picture")
     private String profilePicture;
     @Column(name = "description")
@@ -76,11 +75,11 @@ public class Pet implements Serializable {
         this.name = name;
     }
 
-    public XPetAge getAge() {
+    public PetAge getAge() {
         return age;
     }
 
-    public void setAge(XPetAge age) {
+    public void setAge(PetAge age) {
         this.age = age;
     }
 
