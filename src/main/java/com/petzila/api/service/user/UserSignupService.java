@@ -4,5 +4,5 @@ import com.petzila.api.domain.User;
 import com.petzila.api.model.XSignUp;
 
 public interface UserSignupService {
-    User signup(XSignUp signUp);
+    User signUp(XSignUp signUp);
 }

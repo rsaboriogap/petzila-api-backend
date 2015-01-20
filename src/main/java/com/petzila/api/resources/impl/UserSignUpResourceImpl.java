@@ -3,7 +3,7 @@ package com.petzila.api.resources.impl;
 import com.petzila.api.domain.User;
 import com.petzila.api.exception.ValidationException;
 import com.petzila.api.model.XSignUp;
-import com.petzila.api.model.XSignupType;
+import com.petzila.api.model.XSignUpType;
 import com.petzila.api.resources.UserSignUpResource;
 import com.petzila.api.service.user.UserSignupService;
 import com.petzila.api.utils.DataUtils;
@@ -26,14 +26,14 @@ public class UserSignUpResourceImpl implements UserSignUpResource {
             throw new ValidationException(901);
         } else if (signUp.getSignupType() == null) {
             throw new ValidationException(612);
-        } else if (signUp.getSignupType() != XSignupType.FACEBOOK || signUp.getSignupType() != XSignupType.LOCAL) {
+        } else if (signUp.getSignupType() != XSignUpType.FACEBOOK || signUp.getSignupType() != XSignUpType.LOCAL) {
             throw new ValidationException(613);
-        } else if (signUp.getSignupType() == XSignupType.LOCAL && StringUtils.isBlank(signUp.getEmail())) {
+        } else if (signUp.getSignupType() == XSignUpType.LOCAL && StringUtils.isBlank(signUp.getEmail())) {
             throw new ValidationException(613);
-        } else if (signUp.getSignupType() == XSignupType.FACEBOOK &&
+        } else if (signUp.getSignupType() == XSignUpType.FACEBOOK &&
                 StringUtils.isBlank(signUp.getSocialNetworkID())) {
             throw new ValidationException(604);
-        } else if (signUp.getSignupType() == XSignupType.LOCAL && StringUtils.isBlank(signUp.getPassword())) {
+        } else if (signUp.getSignupType() == XSignUpType.LOCAL && StringUtils.isBlank(signUp.getPassword())) {
             throw new ValidationException(603);
         } else if (StringUtils.isBlank(signUp.getUsername())) {
             throw new ValidationException(610);
@@ -61,16 +61,16 @@ public class UserSignUpResourceImpl implements UserSignUpResource {
             throw new ValidationException(615);
         }
 
-        if (signUp.getSignupType() == XSignupType.LOCAL) {
+        if (signUp.getSignupType() == XSignUpType.LOCAL) {
             signUp.setFacebookToken(null);
             signUp.setSocialNetworkID(null);
             signUp.setFacebookTokenType(null);
         }
 
-        if (signUp.getSignupType() == XSignupType.LOCAL) {//local signup
-            User newUser = userSignupService.signup(signUp);
+        if (signUp.getSignupType() == XSignUpType.LOCAL) {//local signup
+            User newUser = userSignupService.signUp(signUp);
 
-        } else if (signUp.getSignupType() == XSignupType.FACEBOOK) {
+        } else if (signUp.getSignupType() == XSignUpType.FACEBOOK) {
 
         }
 

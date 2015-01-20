@@ -20,7 +20,14 @@ buildscript {
 }
 
 jaxb {
-    xsdDir = "src/main/resources/schema"
+    xsdDir = "src/main/resources/jaxb"
+//    bindingsDir = "src/main/resources/jaxb"
+//    bindings = ["bindings.xjb"]
+    xjc {
+        taskClassname      = "org.jvnet.jaxb2_commons.xjc.XJC2Task"
+        generatePackage    = "com.petzila.api.model"
+        args               = ["-Xinheritance", "-Xannotate"]
+    }
 }
 
 repositories {
@@ -32,6 +39,10 @@ ext {
     junit = '4.12'
     jaxbXjc = '2.2.7-b41'
     jaxbApi = '2.2.7'
+    jaxb2BasicsAnt = '0.9.2'
+    jaxb2Basics = '0.9.2'
+    jaxb2BasicsAnnotate = '1.0.1'
+    jaxb2AnnotatePluginTestAnnoxAnnotations = '1.0.0'
     hibernateEntityManager = '4.3.8.Final'
     dozer= '5.5.1'
     cloudinary = '1.0.14'
@@ -49,19 +60,25 @@ dependencies {
     jaxb "com.sun.xml.bind:jaxb-impl:$jaxbXjc"
     jaxb "javax.xml.bind:jaxb-api:$jaxbApi"
 
+    // JAXB Annotation Plugin
+    jaxb "org.jvnet.jaxb2_commons:jaxb2-basics-ant:$jaxb2BasicsAnt"
+    jaxb "org.jvnet.jaxb2_commons:jaxb2-basics:$jaxb2Basics"
+    jaxb "org.jvnet.jaxb2_commons:jaxb2-basics-annotate:$jaxb2BasicsAnnotate"
+    jaxb "org.jvnet.jaxb2_commons:jaxb2-annotate-plugin-test-annox-annotations:$jaxb2AnnotatePluginTestAnnoxAnnotations"
+
     // Hibernate Core
     compile "org.hibernate:hibernate-entitymanager:$hibernateEntityManager"
     // Hibernate Metamodel Generator
     compile "org.hibernate:hibernate-jpamodelgen:$hibernateEntityManager"
 
-    //COMMONS
+    // Commons
     compile "org.apache.commons:commons-lang3:$commonsLang"
     compile "commons-validator:commons-validator:$commonsValidator"
 
-    //CLOUDINARY
+    // Cloudinary
     compile "com.cloudinary:cloudinary:$cloudinary"
 
-    //DOZER
+    // Dozer
     compile "net.sf.dozer:dozer:$dozer"
 }
 

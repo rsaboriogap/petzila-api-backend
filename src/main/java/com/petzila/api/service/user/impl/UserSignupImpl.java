@@ -4,7 +4,7 @@ import com.petzila.api.domain.User;
 import com.petzila.api.exception.ValidationException;
 import com.petzila.api.mapper.XSignupRequestUserMapper;
 import com.petzila.api.model.XSignUp;
-import com.petzila.api.model.XSignupType;
+import com.petzila.api.model.XSignUpType;
 import com.petzila.api.service.user.UserFinderService;
 import com.petzila.api.service.user.UserSignupService;
 import com.petzila.api.utils.CloudinaryUtils;
@@ -29,9 +29,9 @@ public class UserSignupImpl implements UserSignupService {
     private XSignupRequestUserMapper signupRequestUserMapper;
 
     @Override
-    public User signup(XSignUp signUp) {
+    public User signUp(XSignUp signUp) {
         User newUser = signupRequestUserMapper.convertFrom(signUp);
-        if (signUp.getSignupType() == XSignupType.LOCAL) {
+        if (signUp.getSignupType() == XSignUpType.LOCAL) {
             User dbUser = userFinderService.getByEmail(signUp.getEmail());
             if (dbUser != null) {
                 if (!StringUtils.isBlank(dbUser.getSocialNetworkId())) {

@@ -7,9 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
-/**
- * Created by vicente on 16/01/15.
- */
 public class UserFinderServiceImpl implements UserFinderService {
     @PersistenceContext
     private EntityManager em;
@@ -18,7 +15,7 @@ public class UserFinderServiceImpl implements UserFinderService {
     public User getById(long id) {
         try {
             return (User) em.createQuery("SELECT u FROM User u WHERE u.id=?1").setParameter(1, id).getSingleResult();
-        }catch(NoResultException nrex){
+        } catch (NoResultException nrex) {
             return null;
         }
     }
@@ -27,14 +24,14 @@ public class UserFinderServiceImpl implements UserFinderService {
     public User getByEmail(String email) {
         try {
             return (User) em.createQuery("SELECT u FROM User u WHERE u.email=?1").setParameter(1, email).getSingleResult();
-        }catch(NoResultException nrex){
+        } catch (NoResultException nrex) {
             return null;
         }
     }
 
     @Override
-    public Boolean existsEmail(String email) {
-            Long count= (Long) em.createQuery("SELECT COUNT(u) FROM User u WHERE u.email=?1").setParameter(1, email).getSingleResult();
-            return count > 0;
+    public boolean existsEmail(String email) {
+        Long count = (Long) em.createQuery("SELECT COUNT(u) FROM User u WHERE u.email=?1").setParameter(1, email).getSingleResult();
+        return count > 0;
     }
 }
