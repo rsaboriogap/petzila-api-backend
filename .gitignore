@@ -1,8 +1,10 @@
-.idea
-.gradle
+.gradle/
+.idea/
 build/
 classes/
+db/
+gradle/
+
+api/build/
 
 *.iml
-# Ignore Gradle GUI config
-gradle-app.setting

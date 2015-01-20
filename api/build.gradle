@@ -1,0 +1,53 @@
+apply plugin: 'war'
+
+group = 'com.petzila.api'
+version = '1.0'
+
+// Use Java 8 by default
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    jee = '7.+'
+    junit = '4.12'
+    hibernateEntityManager = '4.3.8.Final'
+    dozer= '5.5.1'
+    cloudinary = '1.0.14'
+    commonsValidator = '1.4.0'
+    commonsLang = '3.3.2'
+}
+
+dependencies {
+    testCompile "junit:junit:$junit"
+
+    providedCompile "javax:javaee-api:$jee"
+
+    // Hibernate Core
+    compile "org.hibernate:hibernate-entitymanager:$hibernateEntityManager"
+    // Hibernate Metamodel Generator
+    compile "org.hibernate:hibernate-jpamodelgen:$hibernateEntityManager"
+
+    // Commons
+    compile "org.apache.commons:commons-lang3:$commonsLang"
+    compile "commons-validator:commons-validator:$commonsValidator"
+
+    // Cloudinary
+    compile "com.cloudinary:cloudinary:$cloudinary"
+
+    // Dozer
+    compile "net.sf.dozer:dozer:$dozer"
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.1'
+}
