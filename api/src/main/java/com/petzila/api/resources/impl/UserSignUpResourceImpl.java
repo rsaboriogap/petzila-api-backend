@@ -5,7 +5,7 @@ import com.petzila.api.exception.ValidationException;
 import com.petzila.api.model.XSignUp;
 import com.petzila.api.model.XSignUpType;
 import com.petzila.api.resources.UserSignUpResource;
-import com.petzila.api.service.user.UserSignupService;
+import com.petzila.api.service.user.UserSignUpService;
 import com.petzila.api.utils.DataUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
@@ -17,7 +17,7 @@ import javax.ws.rs.core.Response;
 @Stateless
 public class UserSignUpResourceImpl implements UserSignUpResource {
     @Inject
-    private UserSignupService userSignupService;
+    private UserSignUpService userSignUpService;
     private EmailValidator emailValidator = EmailValidator.getInstance();
 
     @Override
@@ -68,7 +68,7 @@ public class UserSignUpResourceImpl implements UserSignUpResource {
         }
 
         if (signUp.getSignupType() == XSignUpType.LOCAL) {//local signup
-            User newUser = userSignupService.signUp(signUp);
+            User newUser = userSignUpService.signUp(signUp);
 
         } else if (signUp.getSignupType() == XSignUpType.FACEBOOK) {
 

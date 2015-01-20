@@ -2,11 +2,11 @@ package com.petzila.api.service.user.impl;
 
 import com.petzila.api.domain.User;
 import com.petzila.api.exception.ValidationException;
-import com.petzila.api.mapper.XSignupRequestUserMapper;
+import com.petzila.api.mapper.XSignUpMapper;
 import com.petzila.api.model.XSignUp;
 import com.petzila.api.model.XSignUpType;
-import com.petzila.api.service.user.UserFinderService;
-import com.petzila.api.service.user.UserSignupService;
+import com.petzila.api.service.user.UserFinder;
+import com.petzila.api.service.user.UserSignUpService;
 import com.petzila.api.utils.CloudinaryUtils;
 import org.apache.commons.lang.StringUtils;
 
@@ -18,21 +18,21 @@ import java.io.IOException;
 import java.util.Map;
 
 @Stateless
-public class UserSignupImpl implements UserSignupService {
+public class UserSignUpServiceImpl implements UserSignUpService {
     @PersistenceContext
     private EntityManager em;
     @Inject
-    private UserFinderService userFinderService;
+    private UserFinder userFinder;
     @Inject
     private CloudinaryUtils cloudinaryUtils;
     @Inject
-    private XSignupRequestUserMapper signupRequestUserMapper;
+    private XSignUpMapper signUpMapper;
 
     @Override
     public User signUp(XSignUp signUp) {
-        User newUser = signupRequestUserMapper.convertFrom(signUp);
+        User newUser = signUpMapper.convertFrom(signUp);
         if (signUp.getSignupType() == XSignUpType.LOCAL) {
-            User dbUser = userFinderService.getByEmail(signUp.getEmail());
+            User dbUser = userFinder.getByEmail(signUp.getEmail());
             if (dbUser != null) {
                 if (!StringUtils.isBlank(dbUser.getSocialNetworkId())) {
                     throw new ValidationException(664);
