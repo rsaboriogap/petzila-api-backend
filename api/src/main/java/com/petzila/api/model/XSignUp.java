@@ -12,10 +12,10 @@ public class XSignUp {
     private String profilePicture;
     private XResourceType resourceType;
     private String description;
-    private XName name;
-    private XLocation location;
+    private XName name = new XName();
+    private XLocation location = new XLocation();
     @ValidXSignUpType
-    private XSignUpType signupType;
+    private XSignUpType signupType = XSignUpType.LOCAL;
     private String socialNetworkID;
     private String facebookToken;
     private XFacebookTokenType facebookTokenType;

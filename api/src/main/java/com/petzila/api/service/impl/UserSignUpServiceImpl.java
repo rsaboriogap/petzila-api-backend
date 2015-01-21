@@ -15,6 +15,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Date;
+import java.util.UUID;
 
 @Stateless
 public class UserSignUpServiceImpl implements UserSignUpService {
@@ -71,8 +72,12 @@ public class UserSignUpServiceImpl implements UserSignUpService {
         }
 
         u = new User();
+        u.setUsername(signUp.getUsername());
         u.setFirstName(signUp.getName().getFirstName());
         u.setLastName(signUp.getName().getLastName());
+        u.setEmail(signUp.getEmail());
+        u.setPassword(UUID.randomUUID().toString());
+        u.setSalt(UUID.randomUUID().toString());
         u.setActive(false);
         u.setFounder(indieUserFinder.isFounder(signUp.getEmail()));
         u.setSignupType(SignUpType.LOCAL);

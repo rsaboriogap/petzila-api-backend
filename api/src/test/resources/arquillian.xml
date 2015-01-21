@@ -8,6 +8,7 @@
             <!-- Supported property names: [managementPort, username, managementAddress, bundlePath, managementProtocol,
                         cleanServerBaseDir, jbossHome, password, modulePath] -->
             <property name="jbossHome">/media/rsaborio/development/apps/wildfly-8.2.0.Final/</property>
+            <property name="modulePath">/media/rsaborio/development/apps/wildfly-8.2.0.Final/modules</property>
         </configuration>
     </container>
 </arquillian>

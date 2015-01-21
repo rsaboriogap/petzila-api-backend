@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "comment", catalog = "petzila", schema = "")
+@Table(name = "comment")
 public class Comment implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

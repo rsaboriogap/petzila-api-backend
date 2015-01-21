@@ -8,20 +8,15 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * @author vicente
- */
 @Entity
-@Table(name = "session_request", catalog = "petzila", schema = "")
-@NamedQueries({
-        @NamedQuery(name = "SessionRequest.findAll", query = "SELECT s FROM SessionRequest s")})
+@Table(name = "session_request")
 public class SessionRequest implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "session_request_id")
-    private Long sessionRequestId;
+    private long id;
     @Column(name = "ms_nonce")
     private String msNonce;
     @Column(name = "audio_port")
@@ -33,10 +28,10 @@ public class SessionRequest implements Serializable {
     @Column(name = "session_server_nonce")
     private String sessionServerNonce;
     @Basic(optional = false)
-    @Column(name = "ready")
+    @Column(name = "is_ready")
     private boolean ready;
     @Basic(optional = false)
-    @Column(name = "processed")
+    @Column(name = "is_processed")
     private boolean processed;
     @Column(name = "timestamp")
     @Temporal(TemporalType.TIMESTAMP)
@@ -45,33 +40,18 @@ public class SessionRequest implements Serializable {
     @Column(name = "need_process")
     private boolean needProcess;
     @Basic(optional = false)
-    @Column(name = "invalid")
+    @Column(name = "is_invalid")
     private boolean invalid;
     @JoinColumn(name = "petzi_connect_id", referencedColumnName = "petzi_connect_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private PetziConnect petziConnectId;
+    private PetziConnect petziConnect;
 
-    public SessionRequest() {
+    public long getId() {
+        return id;
     }
 
-    public SessionRequest(Long sessionRequestId) {
-        this.sessionRequestId = sessionRequestId;
-    }
-
-    public SessionRequest(Long sessionRequestId, boolean ready, boolean processed, boolean needProcess, boolean invalid) {
-        this.sessionRequestId = sessionRequestId;
-        this.ready = ready;
-        this.processed = processed;
-        this.needProcess = needProcess;
-        this.invalid = invalid;
-    }
-
-    public Long getSessionRequestId() {
-        return sessionRequestId;
-    }
-
-    public void setSessionRequestId(Long sessionRequestId) {
-        this.sessionRequestId = sessionRequestId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getMsNonce() {
@@ -154,18 +134,18 @@ public class SessionRequest implements Serializable {
         this.invalid = invalid;
     }
 
-    public PetziConnect getPetziConnectId() {
-        return petziConnectId;
+    public PetziConnect getPetziConnect() {
+        return petziConnect;
     }
 
-    public void setPetziConnectId(PetziConnect petziConnectId) {
-        this.petziConnectId = petziConnectId;
+    public void setPetziConnect(PetziConnect petziConnect) {
+        this.petziConnect = petziConnect;
     }
 
     @Override
     public int hashCode() {
         HashCodeBuilder hcb = new HashCodeBuilder();
-        hcb.append(this.sessionRequestId);
+        hcb.append(this.id);
         return hcb.toHashCode();
     }
 
@@ -175,7 +155,7 @@ public class SessionRequest implements Serializable {
         if (SessionRequest.class.isInstance(obj)) {
             SessionRequest sessionRequest = SessionRequest.class.cast(obj);
             EqualsBuilder eb = new EqualsBuilder();
-            eb.append(this.sessionRequestId, sessionRequest.getSessionRequestId());
+            eb.append(this.id, sessionRequest.getId());
             equals = eb.isEquals();
         }
         return equals;
