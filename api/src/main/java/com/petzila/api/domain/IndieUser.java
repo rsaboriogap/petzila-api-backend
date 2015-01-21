@@ -8,8 +8,10 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "IndieUsers", catalog = "petzila", schema = "")
-public class IndieUsers implements Serializable {
+@Table(name = "IndieUser", uniqueConstraints = {
+       @UniqueConstraint(name = "email", columnNames = {"email"})
+})
+public class IndieUser implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -44,10 +46,10 @@ public class IndieUsers implements Serializable {
     @Override
     public boolean equals(Object obj) {
         boolean equals = false;
-        if (IndieUsers.class.isInstance(obj)) {
-            IndieUsers indieUsers = IndieUsers.class.cast(obj);
+        if (IndieUser.class.isInstance(obj)) {
+            IndieUser indieUser = IndieUser.class.cast(obj);
             EqualsBuilder eb = new EqualsBuilder();
-            eb.append(this.id, indieUsers.getId());
+            eb.append(this.id, indieUser.getId());
             equals = eb.isEquals();
         }
         return equals;

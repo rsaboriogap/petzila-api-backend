@@ -1,25 +1,29 @@
 package com.petzila.api.exception;
 
+import com.petzila.api.utils.ErrorCode;
+
 import javax.ejb.ApplicationException;
 
 @ApplicationException(rollback = true)
 public class ServiceException extends RuntimeException {
-    private String message;
-    private int code;
+    private ErrorCode errorCode;
     private Object[] arguments;
 
-    public ServiceException(String message, int code, Object[] arguments) {
-        this.message = message;
-        this.code = code;
+    public ServiceException(ErrorCode errorCode, Object[] arguments) {
+        this.errorCode = errorCode;
         this.arguments = arguments;
     }
 
-    public String getMessage() {
-        return message;
+    public ServiceException(ErrorCode  errorCode) {
+        this(errorCode, null);
     }
 
-    public int getCode() {
-        return code;
+    public String getMessage() {
+        return "@TODO"; //@TODO sacar del archivo de mensajes
+    }
+
+    public ErrorCode getErrorCode() {
+        return errorCode;
     }
 
     public Object[] getArguments() {

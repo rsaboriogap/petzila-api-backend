@@ -15,11 +15,17 @@ buildscript {
 
 repositories {
     mavenCentral()
+    maven { url 'https://repository.jboss.org/nexus/content/groups/public-jboss' }
+    maven { url 'https://repository.jboss.org/nexus/content/repositories' }
+    maven { url 'https://repository.jboss.org/nexus/content/repositories/thirdparty-releases' }
 }
 
 ext {
     jee = '7.+'
+    wildfly = '8.2.0.Final'
+    slf4Simple = '1.7.10'
     junit = '4.12'
+    guava = '18.0'
     hibernateEntityManager = '4.3.8.Final'
     dozer= '5.5.1'
     cloudinary = '1.0.14'
@@ -27,10 +33,26 @@ ext {
     commonsLang = '3.3.2'
 }
 
+ext.jbossHome = hasProperty('jbossHome') ? jbossHome : "${rootDir}/wildfly-8.2.0.Final"
+
 dependencies {
     testCompile "junit:junit:$junit"
 
     providedCompile "javax:javaee-api:$jee"
+
+    // Wildfly Embedded
+    compile "org.wildfly:wildfly-spec-api:$wildfly"
+    compile "org.slf4j:slf4j-simple:$slf4Simple"
+
+    testCompile "org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-depchain:2.1.0"
+    testCompile "org.jboss.arquillian:arquillian-bom:1.1.2.Final-wildfly-1"
+    testCompile "org.jboss.arquillian.junit:arquillian-junit-container:1.1.2.Final-wildfly-1"
+
+    testRuntime "org.jboss.logging:jboss-logging:3.1.4.GA"
+    testRuntime "org.wildfly:wildfly-arquillian-container-embedded:$wildfly"
+
+    // Google Guava
+    compile "com.google.guava:guava:$guava"
 
     // Hibernate Core
     compile "org.hibernate:hibernate-entitymanager:$hibernateEntityManager"
@@ -46,6 +68,21 @@ dependencies {
 
     // Dozer
     compile "net.sf.dozer:dozer:$dozer"
+}
+
+
+test {
+//    jvmArgs '-XX:MaxPermSize=256m'
+
+    /**
+     * Installation of JBOSS to use for testing, this can be set here
+     * or in the arquillian.xml.
+     */
+//    environment 'JBOSS_HOME', rootProject.jbossHome
+    /**
+     * WildFly embedded default logging
+     */
+    systemProperty 'java.util.logging.manager', 'org.jboss.logmanager.LogManager'
 }
 
 task wrapper(type: Wrapper) {
