@@ -2,12 +2,14 @@ package com.petzila.api.model;
 
 import com.petzila.api.validator.ValidXSignUpType;
 
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class XSignUp {
     private String email;
     private String password;
+    @NotNull
     private String username;
     private String profilePicture;
     private XResourceType resourceType;

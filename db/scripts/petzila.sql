@@ -357,11 +357,11 @@ CREATE INDEX `fk_session_request_petzi_connect1_idx` ON `petzila`.`session_reque
 
 
 -- -----------------------------------------------------
--- Table `petzila`.`IndieUsers`
+-- Table `petzila`.`indie_user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `petzila`.`IndieUsers` ;
+DROP TABLE IF EXISTS `petzila`.`indie_user` ;
 
-CREATE TABLE IF NOT EXISTS `petzila`.`IndieUsers` (
+CREATE TABLE IF NOT EXISTS `petzila`.`indie_user` (
   `indie_user_id` BIGINT UNSIGNED NOT NULL,
   `email` VARCHAR(200) NULL,
   PRIMARY KEY (`indie_user_id`))

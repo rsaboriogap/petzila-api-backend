@@ -13,24 +13,31 @@ import com.petzila.api.service.UserSignUpService;
 import com.petzila.api.service.impl.IndieUserFinderImpl;
 import com.petzila.api.service.impl.UserFinderImpl;
 import com.petzila.api.service.impl.UserSignUpServiceImpl;
-import org.apache.http.HttpStatus;
 import org.dozer.DozerBeanMapper;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.extension.rest.client.ArquillianResteasyResource;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import java.net.URL;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 
 @RunWith(Arquillian.class)
 public class UserSignUpResourceTest {
+    @ArquillianResource
+    private URL deploymentURL;
+
     @Deployment(testable = false)
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "test.war")
@@ -56,6 +63,7 @@ public class UserSignUpResourceTest {
     }
 
     @Test
+    @Consumes(MediaType.APPLICATION_JSON)
     public void testSignUpHappyPath(@ArquillianResteasyResource UserSignUpResource userSignUpResource) {
         // Given
         XSignUp xsu = new XSignUp();

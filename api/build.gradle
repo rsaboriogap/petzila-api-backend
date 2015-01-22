@@ -51,6 +51,7 @@ dependencies {
     // https://github.com/arquillian/arquillian-extension-rest/tree/master/rest-client
     testCompile "org.jboss.arquillian.extension:arquillian-rest-client-api:1.0.0.Final-SNAPSHOT"
     testCompile "org.jboss.arquillian.extension:arquillian-rest-client-impl-3x:1.0.0.Final-SNAPSHOT"
+    testCompile "org.jboss.resteasy:resteasy-client:3.0.10.Final"
     testCompile "org.jboss.resteasy:resteasy-jackson-provider:3.0.10.Final"
     testCompile 'org.codehaus.jackson:jackson-jaxrs:1.9.13'
 
@@ -62,7 +63,9 @@ dependencies {
     compile "com.google.guava:guava:$guava"
 
     // Hibernate Core
-    compile "org.hibernate:hibernate-entitymanager:$hibernateEntityManager"
+    compile ("org.hibernate:hibernate-entitymanager:$hibernateEntityManager") {
+        exclude module: "dom4j"
+    }
     // Hibernate Metamodel Generator
     compile "org.hibernate:hibernate-jpamodelgen:$hibernateEntityManager"
 

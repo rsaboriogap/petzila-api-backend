@@ -8,8 +8,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "IndieUser", uniqueConstraints = {
-       @UniqueConstraint(name = "email", columnNames = {"email"})
+@Table(name = "indie_user", uniqueConstraints = {
+       @UniqueConstraint(columnNames = {"email"})
 })
 public class IndieUser implements Serializable {
     private static final long serialVersionUID = 1L;
