@@ -1,6 +1,6 @@
 package com.petzila.api.model;
 
-import com.petzila.api.validation.ValidXSignUpType;
+import com.petzila.api.validator.ValidXSignUpType;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

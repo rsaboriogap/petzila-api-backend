@@ -3,7 +3,7 @@ package com.petzila.api.exception.mapper;
 import com.petzila.api.exception.ServiceException;
 import com.petzila.api.model.response.XError;
 import com.petzila.api.model.response.XStatusType;
-import com.petzila.api.utils.ApiUtils;
+import com.petzila.api.util.ApiUtils;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;

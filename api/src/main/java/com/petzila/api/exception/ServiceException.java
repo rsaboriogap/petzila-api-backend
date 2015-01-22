@@ -1,6 +1,6 @@
 package com.petzila.api.exception;
 
-import com.petzila.api.utils.ErrorCode;
+import com.petzila.api.util.ErrorCode;
 
 import javax.ejb.ApplicationException;
 

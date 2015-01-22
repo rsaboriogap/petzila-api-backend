@@ -1,6 +1,6 @@
-package com.petzila.api.validation;
+package com.petzila.api.validator;
 
-import com.petzila.api.utils.ErrorCode;
+import com.petzila.api.util.ErrorCode;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

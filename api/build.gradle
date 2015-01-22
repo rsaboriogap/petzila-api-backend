@@ -48,6 +48,13 @@ dependencies {
     testCompile "org.jboss.arquillian:arquillian-bom:1.1.2.Final-wildfly-1"
     testCompile "org.jboss.arquillian.junit:arquillian-junit-container:1.1.2.Final-wildfly-1"
 
+    // https://github.com/arquillian/arquillian-extension-rest/tree/master/rest-client
+    testCompile "org.jboss.arquillian.extension:arquillian-rest-client-api:1.0.0.Final-SNAPSHOT"
+    testCompile "org.jboss.arquillian.extension:arquillian-rest-client-impl-3x:1.0.0.Final-SNAPSHOT"
+    testCompile "org.jboss.resteasy:resteasy-jackson-provider:3.0.10.Final"
+    testCompile 'org.codehaus.jackson:jackson-jaxrs:1.9.13'
+
+
     testRuntime "org.jboss.logging:jboss-logging:3.1.4.GA"
     testRuntime "org.wildfly:wildfly-arquillian-container-embedded:$wildfly"
 
@@ -72,13 +79,6 @@ dependencies {
 
 
 test {
-//    jvmArgs '-XX:MaxPermSize=256m'
-
-    /**
-     * Installation of JBOSS to use for testing, this can be set here
-     * or in the arquillian.xml.
-     */
-//    environment 'JBOSS_HOME', rootProject.jbossHome
     /**
      * WildFly embedded default logging
      */

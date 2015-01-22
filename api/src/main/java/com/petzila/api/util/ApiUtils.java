@@ -1,4 +1,4 @@
-package com.petzila.api.utils;
+package com.petzila.api.util;
 
 import java.io.IOException;
 import java.io.InputStream;

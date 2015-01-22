@@ -1,4 +1,4 @@
-package com.petzila.api.validation;
+package com.petzila.api.validator;
 
 import com.petzila.api.model.XSignUpType;
 

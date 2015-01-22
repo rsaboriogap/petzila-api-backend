@@ -1,4 +1,4 @@
-package com.petzila.api.utils;
+package com.petzila.api.util;
 
 public enum ErrorCode {
     VALIDATION_ERROR_SIGN_UP_TYPE(612),

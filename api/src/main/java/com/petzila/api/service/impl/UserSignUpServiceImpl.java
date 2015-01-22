@@ -7,7 +7,7 @@ import com.petzila.api.model.XSignUp;
 import com.petzila.api.service.IndieUserFinder;
 import com.petzila.api.service.UserFinder;
 import com.petzila.api.service.UserSignUpService;
-import com.petzila.api.utils.ErrorCode;
+import com.petzila.api.util.ErrorCode;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.ejb.Stateless;
