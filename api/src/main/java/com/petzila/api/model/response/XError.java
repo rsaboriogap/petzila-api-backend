@@ -49,10 +49,6 @@ public final class XError {
         return data;
     }
 
-    public void setData(XData data) {
-        this.data = data;
-    }
-
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
